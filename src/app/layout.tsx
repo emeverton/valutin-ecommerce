@@ -3,6 +3,7 @@ import { Inter, Playfair_Display } from "next/font/google";
 import { AccountDrawer } from "@/components/account/AccountDrawer";
 import { CartDrawer } from "@/components/cart/CartDrawer";
 import { CookieBanner } from "@/components/gdpr/CookieBanner";
+import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { SplashOverlay } from "@/components/splash/SplashOverlay";
 import { Topbar } from "@/components/layout/Topbar";
@@ -49,6 +50,7 @@ export default function RootLayout({
         <CartDrawer />
         <AccountDrawer />
         {children}
+        <Footer />
         <CookieBanner />
       </body>
     </html>
