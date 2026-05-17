@@ -2,39 +2,47 @@
 
 import { Search, ShoppingBag, User } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
+import { navItems } from "@/config/navigation";
 import { useCartStore } from "@/store/cartStore";
 import { useDrawerStore } from "@/store/drawerStore";
+
+import { MegaMenu } from "./MegaMenu";
 
 const primaryLinks = [
   { label: "A MAISON VALUTIN", href: "/sobre" },
   { label: "SERVIÇOS", href: "/servicos" },
 ];
 
-const navigationItems = [
-  { label: "30% OFF Itens Selecionados*", href: "/promocao", colorClass: "text-promo" },
-  { label: "Edição de Verão", href: "/edicao-verao", colorClass: "text-gray-800" },
-  { label: "Ocasiões Especiais", href: "/ocasioes", colorClass: "text-gray-800" },
-  { label: "Coleção 2026", href: "/novidades", colorClass: "text-gray-800" },
-  { label: "Presentes Recém-nascido", href: "/presentes", colorClass: "text-gray-800" },
-  { label: "Bebê", href: "/bebe", colorClass: "text-gray-800" },
-  { label: "Criança", href: "/crianca", colorClass: "text-gray-800" },
-  { label: "Calçados", href: "/calcados", colorClass: "text-gray-800" },
-  { label: "Acessórios", href: "/acessorios", colorClass: "text-gray-800" },
-  { label: "Quarto", href: "/quarto", colorClass: "text-gray-800" },
-];
-
 export function Header() {
   const [searchOpen, setSearchOpen] = useState(false);
+  const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const cartQuantity = useCartStore((state) =>
     state.items.reduce((total, item) => total + item.quantity, 0),
   );
   const openAccount = useDrawerStore((state) => state.openAccount);
   const openCart = useDrawerStore((state) => state.openCart);
 
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setActiveMenu(null);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
   return (
-    <header className="sticky top-8 z-[200] w-full border-b border-[#E8E8E8] bg-white">
+    <header
+      className="sticky top-8 z-[200] w-full border-b border-[#E8E8E8] bg-white"
+      onMouseLeave={() => setActiveMenu(null)}
+    >
       <div className="grid h-[76px] grid-cols-[auto_1fr_auto] items-center px-10">
         <nav aria-label="Links institucionais" className="flex items-center gap-7">
           {primaryLinks.map((link) => (
@@ -95,16 +103,19 @@ export function Header() {
         aria-label="Categorias principais"
         className="flex h-11 items-center justify-center gap-8 border-t border-gray-100"
       >
-        {navigationItems.map((item) => (
+        {navItems.map((item) => (
           <Link
-            key={item.href}
+            key={item.id}
             href={item.href}
-            className={`${item.colorClass} border-b-2 border-transparent py-3 font-body text-[13px] font-normal leading-none transition-[border-color] duration-150 hover:border-gray-900`}
+            className={`${item.isPromo ? "text-promo" : "text-gray-800"} border-b-2 border-transparent py-3 font-body text-[13px] font-normal leading-none transition-[border-color] duration-150 hover:border-gray-900`}
+            onMouseEnter={() => setActiveMenu(item.id)}
           >
             {item.label}
           </Link>
         ))}
       </nav>
+
+      <MegaMenu activeMenu={activeMenu} />
     </header>
   );
 }
