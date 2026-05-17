@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
+import { AccountDrawer } from "@/components/account/AccountDrawer";
 import { CartDrawer } from "@/components/cart/CartDrawer";
 import { CookieBanner } from "@/components/gdpr/CookieBanner";
 import { Header } from "@/components/layout/Header";
@@ -40,6 +41,7 @@ export default function RootLayout({
         <Topbar />
         <Header />
         <CartDrawer />
+        <AccountDrawer />
         {children}
         <CookieBanner />
       </body>
