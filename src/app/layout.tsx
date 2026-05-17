@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import { AccountDrawer } from "@/components/account/AccountDrawer";
 import { CartDrawer } from "@/components/cart/CartDrawer";
@@ -25,8 +25,53 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Valutin — Moda Infantil Premium",
-  description: "Moda infantil premium inspirada no melhor da moda francesa.",
+  title: {
+    default: "Valutin — Moda Infantil Premium",
+    template: "%s | Valutin",
+  },
+  description:
+    "Moda infantil premium para bebês e crianças de 0 a 12 anos. Coleções exclusivas com algodão orgânico certificado e design inspirado na moda francesa.",
+  keywords: [
+    "moda infantil",
+    "roupa de bebê",
+    "roupa de criança",
+    "moda premium",
+    "algodão orgânico",
+    "Valutin",
+  ],
+  openGraph: {
+    type: "website",
+    locale: "pt_BR",
+    siteName: "Valutin",
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#7D8CA3",
+};
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Valutin",
+  url: "https://www.valutin.com.br",
+  logo: "https://www.valutin.com.br/logo.png",
+  description: "Moda infantil premium inspirada no melhor da tradição francesa",
+  foundingDate: "2024",
+  address: {
+    "@type": "PostalAddress",
+    addressCountry: "BR",
+  },
+  sameAs: ["https://instagram.com/valutin", "https://facebook.com/valutin"],
 };
 
 export default function RootLayout({
@@ -40,6 +85,10 @@ export default function RootLayout({
       className={`${playfairDisplay.variable} ${inter.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col font-body">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
         <div
           id="splash-backdrop"
           style={{ position: "fixed", inset: 0, background: "#111", zIndex: 499 }}
