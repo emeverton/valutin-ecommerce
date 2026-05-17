@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import { CookieBanner } from "@/components/gdpr/CookieBanner";
+import { Header } from "@/components/layout/Header";
 import { Topbar } from "@/components/layout/Topbar";
 import "./globals.css";
 
@@ -36,6 +37,7 @@ export default function RootLayout({
     >
       <body className="flex min-h-full flex-col font-body">
         <Topbar />
+        <Header />
         {children}
         <CookieBanner />
       </body>
