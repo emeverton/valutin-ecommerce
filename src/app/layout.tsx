@@ -4,6 +4,7 @@ import { AccountDrawer } from "@/components/account/AccountDrawer";
 import { CartDrawer } from "@/components/cart/CartDrawer";
 import { CookieBanner } from "@/components/gdpr/CookieBanner";
 import { Header } from "@/components/layout/Header";
+import { SplashOverlay } from "@/components/splash/SplashOverlay";
 import { Topbar } from "@/components/layout/Topbar";
 import "./globals.css";
 
@@ -38,6 +39,11 @@ export default function RootLayout({
       className={`${playfairDisplay.variable} ${inter.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col font-body">
+        <div
+          id="splash-backdrop"
+          style={{ position: "fixed", inset: 0, background: "#111", zIndex: 499 }}
+        />
+        <SplashOverlay />
         <Topbar />
         <Header />
         <CartDrawer />

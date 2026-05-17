@@ -23,7 +23,7 @@ export const useRegionStore = create<RegionStore>()(
       setRegion: (region) => set((state) => ({ ...state, ...region })),
     }),
     {
-      name: 'valutin-region',
+      name: 'valutin-region-store',
     },
   ),
 );
