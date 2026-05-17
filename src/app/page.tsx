@@ -1,9 +1,11 @@
 import Link from "next/link";
 
+import { ProductCardDemo } from "@/components/product/ProductCardDemo";
+
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-1 items-center justify-center bg-brand-xlight px-6 py-16">
-      <section className="mx-auto flex w-full max-w-4xl flex-col items-center gap-8 rounded-xl bg-white px-6 py-12 text-center shadow-lg sm:px-10">
+    <main className="flex min-h-screen flex-1 flex-col bg-brand-xlight">
+      <section className="mx-auto my-16 flex w-[calc(100%-3rem)] max-w-4xl flex-col items-center gap-8 rounded-xl bg-white px-6 py-12 text-center shadow-lg sm:px-10">
         <div className="space-y-4">
           <p className="text-sm font-semibold uppercase tracking-[0.3em] text-brand">
             Valutin
@@ -34,6 +36,8 @@ export default function Home() {
           </Link>
         </div>
       </section>
+
+      <ProductCardDemo />
     </main>
   );
 }
