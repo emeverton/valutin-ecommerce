@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@medusajs/js-sdk": "^2.15.2",
     "@tanstack/react-query": "^5.100.10",
     "framer-motion": "^11.18.2",
     "immer": "^11.1.8",

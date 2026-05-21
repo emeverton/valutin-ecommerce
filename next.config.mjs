@@ -1,3 +1,6 @@
+const medusaBackendUrl =
+  process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL || 'http://localhost:9000';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -6,6 +9,7 @@ const nextConfig = {
       'res.cloudinary.com',
       'cdn.sanity.io',
       'images.tcdn.com.br',
+      new URL(medusaBackendUrl).hostname,
     ],
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [375, 640, 768, 1024, 1280, 1440, 1920],
